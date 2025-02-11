@@ -11,6 +11,7 @@ import (
 type TenderlySimpleTracer interface {
 	OnBlockStart(event gethtracing.BlockEvent)
 	OnBlockEnd(err error)
+	OnBlockEndV2(err error, event gethtracing.BlockEvent)
 	OnClose()
 	OnSystemCallStart()
 	OnSystemCallStartV2(ctx *gethtracing.VMContext)
@@ -57,6 +58,10 @@ func (t *simpleTracer) OnBlockStart(event gethtracing.BlockEvent) {
 
 func (t *simpleTracer) OnBlockEnd(err error) {
 	//log.Info("tenderly::OnBlockEnd", "err", err)
+}
+
+func (t *simpleTracer) OnBlockEndV2(err error, event gethtracing.BlockEvent) {
+	//log.Info("tenderly::OnBlockEndV2", "err", err, "event", event)
 }
 
 func (t *simpleTracer) OnClose() {

@@ -2024,9 +2024,15 @@ func (bc *BlockChain) processBlock(block *types.Block, statedb *state.StateDB, s
 			Safe:      bc.CurrentSafeBlock(),
 		})
 	}
-	if bc.logger != nil && bc.logger.OnBlockEnd != nil {
+	if bc.logger != nil && bc.logger.OnBlockEnd != nil && bc.logger.OnBlockEndV2 != nil {
 		defer func() {
 			bc.logger.OnBlockEnd(blockEndErr)
+			bc.logger.OnBlockEndV2(blockEndErr, tracing.BlockEvent{
+				Block:     block,
+				Finalized: bc.CurrentFinalBlock(),
+				Safe:      bc.CurrentSafeBlock(),
+				TD:        bc.GetTd(block.ParentHash(), block.NumberU64()-1),
+			})
 		}()
 	}
 

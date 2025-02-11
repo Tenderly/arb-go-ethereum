@@ -27,6 +27,7 @@ func NewTenderlySimpleTracerHooks(jsonConfig json.RawMessage) (*gethtracing.Hook
 		OnClose:           tracer.OnClose,
 		OnBlockStart:      tracer.OnBlockStart,
 		OnBlockEnd:        tracer.OnBlockEnd,
+		OnBlockEndV2:      tracer.OnBlockEndV2,
 		OnSystemCallStart: tracer.OnSystemCallStart,
 		OnSystemCallEnd:   tracer.OnSystemCallEnd,
 		//OnSystemCallStartV2: tracer.OnSystemCallStartV2,
