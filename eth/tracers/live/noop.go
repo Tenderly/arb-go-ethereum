@@ -34,6 +34,7 @@ func newNoopTracer(_ json.RawMessage) (*tracing.Hooks, error) {
 		OnBlockchainInit: t.OnBlockchainInit,
 		OnBlockStart:     t.OnBlockStart,
 		OnBlockEnd:       t.OnBlockEnd,
+		OnBlockEndV2:     t.OnBlockEndV2,
 		OnSkippedBlock:   t.OnSkippedBlock,
 		OnGenesisBlock:   t.OnGenesisBlock,
 		OnBalanceChange:  t.OnBalanceChange,
@@ -66,6 +67,9 @@ func (t *noop) OnBlockStart(ev tracing.BlockEvent) {
 }
 
 func (t *noop) OnBlockEnd(err error) {
+}
+
+func (t *noop) OnBlockEndV2(err error, ev tracing.BlockEvent) {
 }
 
 func (t *noop) OnSkippedBlock(ev tracing.BlockEvent) {}

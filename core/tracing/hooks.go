@@ -41,6 +41,7 @@ type StateDB interface {
 	GetBalance(common.Address) *uint256.Int
 	GetNonce(common.Address) uint64
 	GetCode(common.Address) []byte
+	GetCodeHash(addr common.Address) common.Hash
 	GetState(common.Address, common.Hash) common.Hash
 	Exist(common.Address) bool
 	GetRefund() uint64
@@ -128,6 +129,8 @@ type (
 	// BlockEndHook is called after executing a block.
 	BlockEndHook = func(err error)
 
+	BlockEndHookV2 = func(err error, event BlockEvent)
+
 	// SkippedBlockHook indicates a block was skipped during processing
 	// due to it being known previously. This can happen e.g. when recovering
 	// from a crash.
@@ -192,6 +195,7 @@ type Hooks struct {
 	OnClose           CloseHook
 	OnBlockStart      BlockStartHook
 	OnBlockEnd        BlockEndHook
+	OnBlockEndV2      BlockEndHookV2
 	OnSkippedBlock    SkippedBlockHook
 	OnGenesisBlock    GenesisBlockHook
 	OnSystemCallStart OnSystemCallStartHook
